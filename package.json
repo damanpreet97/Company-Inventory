@@ -1,0 +1,64 @@
+{
+  "name": "inventory-app",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/main.js",
+  "scripts": {
+    "start": "concurrently \"yarn dev:webpack\" \"wait-on http://localhost:3000 && electron .\"",
+    "dev:webpack": "webpack serve --mode development --config webpack.config.js",
+    "build": "webpack --mode production && electron-builder"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.2.0",
+    "electron": "22",
+    "firebase": "^12.1.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@babel/preset-react": "^7.27.1",
+    "babel-loader": "^10.0.0",
+    "concurrently": "^9.2.0",
+    "cross-env": "^10.0.0",
+    "css-loader": "^7.1.2",
+    "electron-builder": "^26.0.12",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "wait-on": "^8.0.4",
+    "webpack": "^5.101.0",
+    "webpack-cli": "^6.0.1",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "build": {
+    "appId": "com.inventory.manager",
+    "productName": "Inventory Manager",
+    "directories": {
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json",
+      "src/main.js"
+    ],
+    "extraResources": [
+      {
+        "from": "db/",
+        "to": "db/"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "ia32"
+          ]
+        }
+      ]
+    }
+  },
+  "license": "MIT"
+}
